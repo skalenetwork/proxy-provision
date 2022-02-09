@@ -1,0 +1,53 @@
+- name: Copy SSL certificate file (proxy)
+  copy:
+    src: '/home/ubuntu/ssl/fullchain.pem'
+    dest: '/home/ubuntu/skale-proxy/data/server.crt'
+    remote_src: true
+
+- name: Copy SSL private key file (proxy)
+  copy:
+    src: '/home/ubuntu/ssl/privkey.pem'
+    dest: '/home/ubuntu/skale-proxy/data/server.key'
+    remote_src: true
+
+- name: Create ABIs dir
+  file:
+    path: /home/ubuntu/skale-proxy/abi
+    state: directory
+
+- name: Copy ABIs to proxy
+  copy:
+    src: "files/abi.json"
+    dest: "/home/ubuntu/skale-proxy/abi/abi.json"
+
+- name: Copy ABIs to proxy-ui
+  copy:
+    src: "files/abi.json"
+    dest: "/home/ubuntu/skale-proxy/proxy-ui/src/abis/manager.json"
+
+- name: Remove existent .env content
+  shell: "echo '' > /home/ubuntu/skale-proxy/proxy-ui/.env"
+
+- name: Write variables to .env file for proxy-ui
+  lineinfile:
+    path: "/home/ubuntu/skale-proxy/proxy-ui/.env"
+    insertbefore: BOF
+    line: "{{ item.name }}={{ item.value }}"
+  with_items:
+    - { name: REACT_APP_BASE_PROXY_URL, value: "{{ proxy_prefix }}-{{ groups['proxy'].index(inventory_hostname) }}.{{ base_domain }}"}
+    - { name: REACT_APP_EXPLORER_URL, value: "{{ explorer_prefix }}-{{ groups['proxy'].index(inventory_hostname) }}.{{ base_domain }}"}
+    - { name: REACT_APP_CHAIN_ID, value: "{{ mainnet_chain_id }}"}
+    - { name: REACT_APP_NETWORK_NAME, value: "{{ ui_prefix }}-{{ groups['proxy'].index(inventory_hostname) }}"}
+    - { name: REACT_APP_MAIN_WEBSITE_URL, value: "{{ website_url }}"}
+    - { name: REACT_APP_DOCS_WEBSITE_URL, value: "{{ docs_url }}"}
+    - { name: REACT_APP_NETWORKS, value: "{{ ui_networks_dict }}"}
+
+- name: Run proxy
+  command: "docker-compose up -d --build"
+  environment:
+    FIRST_SCHAIN_ID: "{{ groups['proxy'].index(inventory_hostname) * 10 }}"
+    LAST_SCHAIN_ID: "{{ ( groups['proxy'].index(inventory_hostname) + 1) * 10 }}"
+    PROXY_FULL_HOST_NAME: hack-proxy-{{ groups['proxy'].index(inventory_hostname) }}.{{ base_domain }}
+    ENDPOINT: "{{ endpoint }}"
+  args:
+    chdir: /home/ubuntu/skale-proxy

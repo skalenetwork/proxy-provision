@@ -1,0 +1,17 @@
+[all:vars]
+ansible_ssh_user=''
+ansible_python_interpreter=/usr/bin/python3
+
+endpoint=''
+base_domain=''
+
+proxy_prefix=''
+explorer_prefix=''
+
+ui_prefix=''
+ui_networks_dict='{}'
+
+website_url=''
+docs_url=''
+
+mainnet_chain_id=''
