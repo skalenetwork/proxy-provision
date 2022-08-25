@@ -1,5 +1,12 @@
-files/ssl/*
 files/abi.json
 inventory/
 
 ansible.cfg
+
+files/ssl/*
+inventory/dev
+inventory/hosts
+
+_network_files/
+
+.DS_Store

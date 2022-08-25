@@ -68,7 +68,3 @@
     state: started
   become: true
   tags: ntp
-
-- import_tasks: ssl.yaml
-  tags:
-    ssl

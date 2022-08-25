@@ -7,12 +7,12 @@
     recursive: yes
     track_submodules: yes
     force: yes
-    version: ethdenver
+    version: feature/SKALE-4289-refactor-proxy
 
-- name: Clone blockscout repository
+- name: Clone skale-explorer repository
   git:
-    repo: https://github.com/skalenetwork/blockscout.git
-    dest: /home/ubuntu/blockscout/
+    repo: https://github.com/skalenetwork/skale-explorer.git
+    dest: /home/ubuntu/skale-explorer/
     clone: yes
     update: yes
     recursive: yes

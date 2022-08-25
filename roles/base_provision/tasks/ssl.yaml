@@ -1,3 +1,0 @@
-
-- name: Copy SSL certs
-  copy: src=files/ssl/ dest=/home/ubuntu/ssl/

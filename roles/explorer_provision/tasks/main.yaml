@@ -11,26 +11,26 @@
 - name: Copy ABIs to explorer
   copy:
     src: "files/abi.json"
-    dest: "/home/ubuntu/blockscout/admin/data/abi.json"
+    dest: "/home/ubuntu/skale-explorer/data/abi.json"
 
 - name: Copy SSL certificate file (explorer)
   copy:
     src: "/home/ubuntu/ssl/explorer-{{ groups['explorer'].index(inventory_hostname) }}/fullchain.pem"
-    dest: '/home/ubuntu/blockscout/admin/data/certs/server.crt'
+    dest: '/home/ubuntu/skale-explorer/data/certs/server.crt'
     remote_src: true
 
 - name: Copy SSL private key file (explorer)
   copy:
     src: "/home/ubuntu/ssl/explorer-{{ groups['explorer'].index(inventory_hostname) }}/privkey.pem"
-    dest: '/home/ubuntu/blockscout/admin/data/certs/server.key'
+    dest: '/home/ubuntu/skale-explorer/data/certs/server.key'
     remote_src: true
 
 - name: Run explorer
-  command: "docker-compose up -d"
+  command: "bash run.sh"
   environment:
     FIRST_SCHAIN_ID: "{{ groups['explorer'].index(inventory_hostname) * 10 }}"
     LAST_SCHAIN_ID: "{{ ( groups['explorer'].index(inventory_hostname) + 1) * 10 }}"
-    SCHAIN_PROXY_DOMAIN: "{{ proxy_prefix }}-{{ groups['explorer'].index(inventory_hostname) }}.{{ base_domain }}"
-    ENDPOINT: "{{ endpoint }}"
+    SCHAIN_PROXY_DOMAIN: "{{ proxy_domain }}"
+    ENDPOINT: "{{ eth_endpoint }}"
   args:
-    chdir: /home/ubuntu/blockscout/admin
+    chdir: /home/ubuntu/skale-explorer
