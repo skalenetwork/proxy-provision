@@ -10,3 +10,5 @@ inventory/hosts
 _network_files/
 
 .DS_Store
+
+venv/
