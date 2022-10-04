@@ -9,11 +9,11 @@
     dest: "/home/ubuntu/skale-proxy/data/abi.json"
 
 - name: Remove existent .env content
-  shell: "echo '' > /home/ubuntu/skale-proxy/proxy-ui/.env"
+  shell: "echo '' > /home/ubuntu/skale-proxy/network-ui/.env"
 
-- name: Write variables to .env file for proxy-ui
+- name: Write variables to .env file for network-ui
   lineinfile:
-    path: "/home/ubuntu/skale-proxy/proxy-ui/.env"
+    path: "/home/ubuntu/skale-proxy/network-ui/.env"
     insertbefore: BOF
     line: "{{ item.name }}={{ item.value }}"
   with_items:
@@ -25,6 +25,24 @@
     - { name: DOCS_WEBSITE_URL, value: "{{ docs_website_url }}"}
     - { name: NETWORKS, value: "{{ networks }}"}
     - { name: ABIS_URL, value: "{{ abis_url }}"}
+
+- name: Copy Metaport config to proxy
+  copy:
+    src: "files/metaportConfig.json"
+    dest: "/home/ubuntu/skale-proxy/network-ui/src/metaportConfig.json"
+
+
+- name: Update containers
+  command: "docker-compose pull"
+  args:
+    chdir: /home/ubuntu/skale-proxy
+
+- name: Build network-ui
+  command: "bash build.sh"
+  args:
+    chdir: /home/ubuntu/skale-proxy/network-ui
+  environment:
+    NETWORK_NAME: "{{ network_name }}"
 
 - name: Run proxy
   command: "bash scripts/run_proxy.sh"

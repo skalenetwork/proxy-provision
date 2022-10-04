@@ -7,9 +7,9 @@
     recursive: yes
     track_submodules: yes
     force: yes
-    version: feature/SKALE-4289-refactor-proxy
+    version: develop
 
-- name: Clone skale-explorer repository
+- name: Clone explorer repository
   git:
     repo: https://github.com/skalenetwork/skale-explorer.git
     dest: /home/ubuntu/skale-explorer/

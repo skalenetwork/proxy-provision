@@ -12,3 +12,5 @@ _network_files/
 .DS_Store
 
 venv/
+
+metaportConfig.json
