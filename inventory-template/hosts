@@ -1,0 +1,5 @@
+[explorer]
+explorer-0 ansible_host= ansible_ssh_user=
+
+[proxy]
+proxy-0 ansible_host= ansible_ssh_user=
