@@ -58,7 +58,7 @@ docs_website_url='https://docs.skale.network/docs/' # SKALE Docs Website URL
 networks='{}' # Legacy variable, keep as is
 abis_url='https://github.com/skalenetwork/skale-network/tree/master/releases/mainnet' # URL of SM contracts ABI
 
-local_ssl= # optional (for automated SSL setup)
+local_ssl=false # optional, keep false to disable (for automated SSL setup)
 ```
 
 4. Copy SKALE Manager ABI file for your network to `files/abi.json`
