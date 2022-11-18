@@ -1,0 +1,27 @@
+[proxy:vars]
+domain= # optional - proxy domain name (for automated SSL setup)
+
+[explorer:vars]
+domain= # optional - explorer domain name (for automated SSL setup)
+
+[all:vars]
+
+base_path= # home path on the machine(s) - e.g. /home/ubuntu
+do_token= # optional - DigitalOcean token (for automated SSL setup)
+email= # optional - SSL cert email (for automated SSL setup)
+
+ansible_ssh_user='' # username on machine(s) - e.g. ubuntu
+ansible_python_interpreter=/usr/bin/python3
+
+proxy_domain='' # proxy domain name
+explorer_domain='' # explorer domain name (optional for proxy-only setup)
+chain_id='0x1' # Chain ID of the network where SM contracts are deployed - e.g. 0x1
+network_name='mainnet' # SKALE Network name - e.g. mainnet / staging / etc
+eth_endpoint='' # Ethereum Mainnet endpoint
+
+main_website_url='https://skale.network/' # SKALE Website URL
+docs_website_url='https://docs.skale.network/docs/' # SKALE Docs Website URL
+networks='{}' # Legacy variable, keep as is
+abis_url='https://github.com/skalenetwork/skale-network/tree/master/releases/mainnet' # URL of SM contracts ABI
+
+local_ssl= # optional (for automated SSL setup)

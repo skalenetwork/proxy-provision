@@ -1,0 +1,33 @@
+- name: Clone blockscout repository
+  git:
+    repo: https://github.com/skalenetwork/blockscout.git
+    dest: "{{ base_path }}/blockscout/"
+    clone: yes
+    update: yes
+    recursive: yes
+    track_submodules: yes
+    force: yes
+
+- name: Copy ABIs to explorer
+  copy:
+    src: "files/abi.json"
+    dest: "{{ base_path }}/skale-explorer/data/abi.json"
+
+- name: Copy SSL certificate file (explorer)
+  copy:
+    src: "{{ base_path }}/ssl/{{ inventory_hostname }}/{{ item.src }}"
+    dest: "{{ base_path }}/skale-explorer/data/certs/{{ item.dest }}"
+    remote_src: true
+  loop:
+    - { src: "fullchain.pem", dest: "server.crt" }
+    - { src: "privkey.pem", dest: "server.key" }
+
+- name: Run explorer
+  command: "bash run.sh"
+  environment:
+    FIRST_SCHAIN_ID: "{{ groups['explorer'].index(inventory_hostname) * 10 }}"
+    LAST_SCHAIN_ID: "{{ ( groups['explorer'].index(inventory_hostname) + 1) * 10 }}"
+    SCHAIN_PROXY_DOMAIN: "{{ domain }}"
+    ENDPOINT: "{{ eth_endpoint }}"
+  args:
+    chdir: "{{ base_path }}/skale-explorer"

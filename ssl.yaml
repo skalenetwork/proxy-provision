@@ -1,0 +1,7 @@
+- name: Setup SSL certificates
+  hosts: proxy,explorer
+  become: true
+  roles:
+    - role: ssl
+      when: local_ssl is defined and local_ssl
+      tags: ssl

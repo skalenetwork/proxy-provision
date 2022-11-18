@@ -1,0 +1,8 @@
+- name: Setup Proxy
+  hosts: proxy
+  become: true
+  roles:
+    - role: proxy
+      vars:
+        explorer_domain: "{{ hostvars[groups['explorer'][0]]['domain'][2:] }}"
+      tags: proxy
