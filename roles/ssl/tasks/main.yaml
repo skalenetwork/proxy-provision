@@ -1,23 +1,23 @@
 - import_tasks: install.yaml
-  when: local_ssl is not defined or local_ssl
+  when: certificates == "certbot"
   tags: certbot_install
 
 - import_tasks: do.yaml
-  when: local_ssl is not defined or local_ssl
+  when: certificates == "certbot"
   tags: do_configure
 
 - import_tasks: ensure.yaml
-  when: local_ssl is not defined or local_ssl
+  when: certificates == "certbot"
   tags: certbot_generate
 
 - import_tasks: hook.yaml
-  when: local_ssl is not defined or local_ssl
+  when: certificates == "certbot"
   tags: certbot_generate
 
 - import_tasks: prepare.yaml
-  when: local_ssl is not defined or local_ssl
+  when: certificates == "certbot"
   tags: ssl_prepare
 
 - import_tasks: sync.yaml
-  when: local_ssl is defined and not local_ssl
-  tags: ssl_prepare
+  when: certificates == "custom"
+  tags: ssl_sync

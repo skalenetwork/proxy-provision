@@ -5,4 +5,4 @@
     recurse: yes
 
 - name: Copy SSL certs
-  copy: src=files/ssl/ dest="{{ base_path }}/ssl"
+  copy: src=files/ssl/ dest="{{ base_path }}/ssl/{{ inventory_hostname }}"

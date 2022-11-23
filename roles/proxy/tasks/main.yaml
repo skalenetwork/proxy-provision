@@ -1,9 +1,3 @@
-- name: Set explorer_domain var
-  set_fact:
-    explorer_domain: "{{ hostvars[groups['explorer'][0]]['domain'][2:] }}"
-  when: explorer_domain is not defined or not explorer_domain
-
-
 - name: Create ABIs dir
   file:
     path: "{{ base_path }}/skale-proxy/abi"
@@ -23,7 +17,7 @@
     insertbefore: BOF
     line: "{{ item.name }}={{ item.value }}"
   with_items:
-    - { name: BASE_PROXY_URL, value: "{{ domain }}"}
+    - { name: BASE_PROXY_URL, value: "{{ proxy_domain }}"}
     - { name: EXPLORER_URL, value: "{{ explorer_domain }}"}
     - { name: CHAIN_ID, value: "{{ chain_id }}"}
     - { name: NETWORK_NAME, value: "{{ network_name }}"}
@@ -61,7 +55,7 @@
 - name: Run proxy
   command: "bash scripts/run_proxy.sh"
   environment:
-    BASE_PROXY_URL: "{{ domain }}"
+    BASE_PROXY_URL: "{{ proxy_domain }}"
     EXPLORER_URL: "{{ explorer_domain }}"
     CHAIN_ID: "{{ chain_id }}"
     NETWORK_NAME: "{{ network_name }}"
@@ -69,7 +63,7 @@
     DOCS_WEBSITE_URL: "{{ docs_website_url }}"
     FIRST_SCHAIN_ID: "{{ groups['proxy'].index(inventory_hostname) * 100 }}"
     LAST_SCHAIN_ID: "{{ ( groups['proxy'].index(inventory_hostname) + 1) * 100 }}"
-    PROXY_FULL_HOST_NAME: "{{ domain }}"
+    PROXY_FULL_HOST_NAME: "{{ proxy_domain }}"
     ETH_ENDPOINT: "{{ eth_endpoint }}"
     NETWORKS: "{}"
     ABIS_URL: "{{ abis_url }}"
