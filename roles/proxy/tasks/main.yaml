@@ -1,3 +1,9 @@
+- name: Set explorer_domain var
+  set_fact:
+    explorer_domain: "{{ hostvars[groups['explorer'][0]]['domain'][2:] }}"
+  when: explorer_domain is not defined or not explorer_domain
+
+
 - name: Create ABIs dir
   file:
     path: "{{ base_path }}/skale-proxy/abi"
