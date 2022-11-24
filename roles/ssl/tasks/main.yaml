@@ -1,23 +1,23 @@
 - import_tasks: install.yaml
-  when: certificates == "certbot"
+  when: cert_mode == "certbot"
   tags: certbot_install
 
 - import_tasks: do.yaml
-  when: certificates == "certbot"
+  when: cert_mode == "certbot"
   tags: do_configure
 
 - import_tasks: ensure.yaml
-  when: certificates == "certbot"
+  when: cert_mode == "certbot"
   tags: certbot_generate
 
 - import_tasks: hook.yaml
-  when: certificates == "certbot"
+  when: cert_mode == "certbot"
   tags: certbot_generate
 
 - import_tasks: prepare.yaml
-  when: certificates == "certbot"
+  when: cert_mode == "certbot"
   tags: ssl_prepare
 
 - import_tasks: sync.yaml
-  when: certificates == "custom"
+  when: cert_mode == "custom"
   tags: ssl_sync

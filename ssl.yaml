@@ -5,7 +5,7 @@
     - role: ssl
       vars:
         domain: "{{ proxy_domain }}"
-      tags: ssl
+        ssl_src: "files/ssl/proxy"
 
 - name: Setup SSL certificates for explorer
   hosts: explorer
@@ -14,4 +14,4 @@
     - role: ssl
       vars:
         domain: "*.{{ explorer_domain }}"
-      tags: ssl
+        ssl_src: "files/ssl/explorer"
