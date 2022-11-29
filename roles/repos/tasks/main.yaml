@@ -7,7 +7,6 @@
     recursive: yes
     track_submodules: yes
     force: yes
-    version: develop
 
 - name: Clone explorer repository
   git:

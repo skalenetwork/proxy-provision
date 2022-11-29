@@ -1,23 +1,23 @@
 - import_tasks: install.yaml
-  when: local_src is not defined or local_src
+  when: cert_mode == "certbot"
   tags: certbot_install
 
 - import_tasks: do.yaml
-  when: local_src is not defined or local_src
+  when: cert_mode == "certbot"
   tags: do_configure
 
 - import_tasks: ensure.yaml
-  when: local_src is not defined or local_src
+  when: cert_mode == "certbot"
   tags: certbot_generate
 
 - import_tasks: hook.yaml
-  when: local_src is not defined or local_src
+  when: cert_mode == "certbot"
   tags: certbot_generate
 
 - import_tasks: prepare.yaml
-  when: local_src is not defined or local_src
+  when: cert_mode == "certbot"
   tags: ssl_prepare
 
 - import_tasks: sync.yaml
-  when: local_src is defined and not local_src
-  tags: ssl_prepare
+  when: cert_mode == "custom"
+  tags: ssl_sync

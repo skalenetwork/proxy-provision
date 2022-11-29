@@ -1,7 +1,17 @@
-- name: Setup SSL certificates
-  hosts: proxy,explorer
+- name: Setup SSL certificates for proxy
+  hosts: proxy
   become: true
   roles:
     - role: ssl
-      when: local_ssl is defined and local_ssl
-      tags: ssl
+      vars:
+        domain: "{{ proxy_domain }}"
+        ssl_src: "files/ssl/proxy"
+
+- name: Setup SSL certificates for explorer
+  hosts: explorer
+  become: true
+  roles:
+    - role: ssl
+      vars:
+        domain: "*.{{ explorer_domain }}"
+        ssl_src: "files/ssl/explorer"
