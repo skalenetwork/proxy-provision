@@ -1,4 +1,4 @@
-# - import_playbook: base.yaml
+- import_playbook: base.yaml
 - import_playbook: repos.yaml
 - import_playbook: ssl.yaml
 - import_playbook: proxy.yaml
