@@ -31,14 +31,7 @@
     src: "files/metaportConfig.json"
     dest: "{{ base_path }}/skale-proxy/network-ui/src/metaportConfig.json"
 
-- name: Copy SSL certificate file (proxy)
-  copy:
-    src: "{{ base_path }}/ssl/{{ inventory_hostname }}/{{ item.src }}"
-    dest: "{{ base_path }}/skale-proxy/data/{{ item.dest }}"
-    remote_src: true
-  loop:
-    - { src: "fullchain.pem", dest: "server.crt" }
-    - { src: "privkey.pem", dest: "server.key" }
+- include_tasks: certs.yaml
 
 - name: Update containers
   command: "docker-compose pull"

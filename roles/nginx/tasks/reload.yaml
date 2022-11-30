@@ -1,0 +1,14 @@
+- name: Get {{ nginx_container }} info
+  docker_container_info:
+    name: "{{ nginx_container }}"
+  register: nginx_container_info
+
+- name: Set {{ nginx_container }} state
+  set_fact:
+    is_running: "{{ nginx_container_info | json_query('container.State.Running') }}"
+
+- name: Reload nginx
+  community.docker.docker_container_exec:
+    container: "{{ nginx_container }}"
+    command: "nginx -s reload"
+  when: is_running

@@ -1,0 +1,10 @@
+- name: Fetch SSL certificate file for proxy
+  copy:
+    src: "{{ base_path }}/ssl/{{ inventory_hostname }}/{{ item.src }}"
+    dest: "{{ base_path }}/skale-proxy/data/{{ item.dest }}"
+    remote_src: true
+  loop:
+    - { src: "fullchain.pem", dest: "server.crt" }
+    - { src: "privkey.pem", dest: "server.key" }
+  tags: proxy_ssl_certs
+
