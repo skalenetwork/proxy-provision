@@ -1,0 +1,8 @@
+- name: Copy SSL certificate file (explorer)
+  copy:
+    src: "{{ base_path }}/ssl/{{ inventory_hostname }}/{{ item.src }}"
+    dest: "{{ base_path }}/skale-explorer/data/certs/{{ item.dest }}"
+    remote_src: true
+  loop:
+    - { src: "fullchain.pem", dest: "server.crt" }
+    - { src: "privkey.pem", dest: "server.key" }

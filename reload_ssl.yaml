@@ -1,0 +1,45 @@
+- name: Reload SSL certificates for proxy
+  hosts: proxy
+  become: true
+  tasks:
+    - name: Reissue ssl certificates
+      include_role:
+        name: ssl
+      vars:
+        domain: "{{ proxy_domain }}"
+        ssl_src: "files/ssl/proxy"
+
+    - name: Sync certificates for proxy
+      include_role:
+        name: proxy
+        tasks_from: certs.yaml
+
+    - name: Sync certificates for proxy
+      include_role:
+        name: nginx
+        tasks_from: reload.yaml
+      vars:
+        nginx_container: "proxy_nginx"
+
+- name: Reload SSL certificates for proxy
+  hosts: explorer
+  become: true
+  tasks:
+    - name: Reissue ssl certificates
+      include_role:
+        name: ssl
+      vars:
+        domain: "*.{{ explorer_domain }}"
+        ssl_src: "files/ssl/explorer"
+
+    - name: Sync certificates for proxy
+      include_role:
+        name: explorer
+        tasks_from: certs.yaml
+
+    - name: Sync certificates for proxy
+      include_role:
+        name: nginx
+        tasks_from: reload.yaml
+      vars:
+        nginx_container: "nginx"
