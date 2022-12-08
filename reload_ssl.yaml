@@ -14,7 +14,7 @@
         name: proxy
         tasks_from: certs.yaml
 
-    - name: Sync certificates for proxy
+    - name: Reload proxy nginx configuration
       include_role:
         name: nginx
         tasks_from: reload.yaml
@@ -37,7 +37,7 @@
         name: explorer
         tasks_from: certs.yaml
 
-    - name: Sync certificates for proxy
+    - name: Reload explorer nginx configuration
       include_role:
         name: nginx
         tasks_from: reload.yaml
