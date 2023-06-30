@@ -26,11 +26,6 @@
     - { name: NETWORKS, value: "{{ networks }}"}
     - { name: ABIS_URL, value: "{{ abis_url }}"}
 
-- name: Copy Metaport config to proxy
-  copy:
-    src: "files/metaportConfig.json"
-    dest: "{{ base_path }}/skale-proxy/network-ui/src/metaportConfig.json"
-
 - name: Copy SSL certificate file (proxy)
   copy:
     src: "{{ base_path }}/ssl/{{ inventory_hostname }}/{{ item.src }}"

@@ -60,8 +60,7 @@ email= # optional - SSL cert email (for 'certbot' cert_mode)
 ```
 
 3. Copy SKALE Manager ABI file for your network to `files/abi.json`
-4. Copy Metaport config to `files/metaportConfig.json` - if you don't need Metaport - put `{}` in the file.
-5. Configure SSL.
+4. Configure SSL.
 You can use your own certificates by placing them to `files/ssl/proxy` / `files/ssl/explorer` (if explorer is necessary) on the host machine and setting `cert_mode=custom` in inventory.
 Alternatively if you have DigitalOcean account you can put `cert_mode=certbot` and add `do_token` and `email` to inventory to issue free Let's encrypt certificates using certbot.
 > Note: Right now only DigitalOcean can be used to complete ACME challenge for 'certbot' mode.
