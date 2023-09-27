@@ -17,6 +17,7 @@
     recursive: yes
     track_submodules: yes
     force: yes
+    version: enhancement/blockscout-update
 
 - name: Copy ABIs
   copy:
