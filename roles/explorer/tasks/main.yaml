@@ -27,7 +27,7 @@
   environment:
     FIRST_SCHAIN_ID: "{{ groups['explorer'].index(inventory_hostname) * 10 }}"
     LAST_SCHAIN_ID: "{{ ( groups['explorer'].index(inventory_hostname) + 1) * 10 }}"
-    SCHAIN_PROXY_DOMAIN: "{{ explorer_domain }}"
+    SCHAIN_PROXY_DOMAIN: "{{ proxy_domain }}"
     ENDPOINT: "{{ eth_endpoint }}"
     FROM_FIRST_BLOCK: "1"
     SCHAIN_NAMES: "{{ schain_names }}"
