@@ -44,14 +44,7 @@ ansible_python_interpreter=/usr/bin/python3
 base_path= # home path on the machine(s) - e.g. /home/ubuntu
 proxy_domain='' # proxy domain name
 explorer_domain='' # explorer domain name (optional for proxy-only setup)
-chain_id='0x1' # Chain ID of the network where SM contracts are deployed - e.g. 0x1
-network_name='mainnet' # SKALE Network name - e.g. mainnet / staging / etc
 eth_endpoint='' # Ethereum Mainnet endpoint
-
-main_website_url='https://skale.network/' # SKALE Website URL
-docs_website_url='https://docs.skale.network/docs/' # SKALE Docs Website URL
-networks='{}' # Legacy variable, keep as is
-abis_url='https://github.com/skalenetwork/skale-network/tree/master/releases/mainnet' # URL of SM contracts ABI
 
 cert_mode=  # 'certbot' - generate using certbot / custom - upload your own
 
