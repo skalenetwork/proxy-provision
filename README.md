@@ -50,6 +50,9 @@ cert_mode=  # 'certbot' - generate using certbot / custom - upload your own
 
 do_token= # optional - DigitalOcean token (for 'certbot' cert_mode)
 email= # optional - SSL cert email (for 'certbot' cert_mode)
+
+heartbeat_url= # optional - URL for heartbeat monitoring
+network_name= # optional - network name for dapp metrics
 ```
 
 3. Copy SKALE Manager ABI file for your network to `files/abi.json`

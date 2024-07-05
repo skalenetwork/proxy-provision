@@ -28,5 +28,7 @@
     ETH_ENDPOINT: "{{ eth_endpoint }}"
     FIRST_SCHAIN_ID: "{{ groups['proxy'].index(inventory_hostname) * 100 }}"
     LAST_SCHAIN_ID: "{{ ( groups['proxy'].index(inventory_hostname) + 1) * 100 }}"
+    NETWORK_NAME: "{{ network_name }}"
+    HEARTBEAT_URL: "{{ heartbeat_url }}"
   args:
     chdir: "{{ base_path }}/skale-proxy"
