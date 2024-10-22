@@ -14,7 +14,7 @@ A set of ansible playbooks to setup SKALE Proxy and Block explorer in the cloud
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt 
+pip install -r requirements.txt
 ```
 
 ## 2. Setup
@@ -53,13 +53,17 @@ email= # optional - SSL cert email (for 'certbot' cert_mode)
 
 heartbeat_url= # optional - URL for heartbeat monitoring
 network_name= # optional - network name for dapp metrics
+
+mysql_user= # optional - MySQL user for metrics db
+mysql_password= # optional - MySQL password for metrics db
+mysql_root_password= # optional - MySQL root password for metrics db
 ```
 
 3. Copy SKALE Manager ABI file for your network to `files/abi.json`
 4. Configure SSL.
-You can use your own certificates by placing them to `files/ssl/proxy` / `files/ssl/explorer` (if explorer is necessary) on the host machine and setting `cert_mode=custom` in inventory.
-Alternatively if you have DigitalOcean account you can put `cert_mode=certbot` and add `do_token` and `email` to inventory to issue free Let's encrypt certificates using certbot.
-> Note: Right now only DigitalOcean can be used to complete ACME challenge for 'certbot' mode.
+   You can use your own certificates by placing them to `files/ssl/proxy` / `files/ssl/explorer` (if explorer is necessary) on the host machine and setting `cert_mode=custom` in inventory.
+   Alternatively if you have DigitalOcean account you can put `cert_mode=certbot` and add `do_token` and `email` to inventory to issue free Let's encrypt certificates using certbot.
+   > Note: Right now only DigitalOcean can be used to complete ACME challenge for 'certbot' mode.
 
 ## 3. Usage
 
@@ -76,7 +80,6 @@ ansible-playbook -i inventory main.yaml
 [![Discord](https://img.shields.io/discord/534485763354787851.svg)](https://discord.gg/vvUtWJB)
 
 ## License
-
 
 ![GitHub](https://img.shields.io/github/license/skalenetwork/skale.py.svg)
 All contributions are made under the [GNU Lesser General Public License v3](https://www.gnu.org/licenses/lgpl-3.0.en.html). See [LICENSE](LICENSE).

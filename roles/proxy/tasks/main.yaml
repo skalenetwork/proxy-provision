@@ -30,5 +30,8 @@
     LAST_SCHAIN_ID: "{{ ( groups['proxy'].index(inventory_hostname) + 1) * 100 }}"
     NETWORK_NAME: "{{ network_name }}"
     HEARTBEAT_URL: "{{ heartbeat_url }}"
+    MYSQL_USER: "{{ mysql_user }}"
+    MYSQL_PASSWORD: "{{ mysql_password }}"
+    MYSQL_ROOT_PASSWORD: "{{ mysql_root_password }}"
   args:
     chdir: "{{ base_path }}/skale-proxy"
